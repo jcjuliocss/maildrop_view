@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+	<title>Adiciona produto</title>
+</head>
+<body>
+    <form name="form" action="manage_add_maildrop_view"><br>
+	    <p>Nome da instancia:</p>
+	    <input type="text" name="id:string"><br>
+	    <input type="submit" value="add">
+	</form>
+</body>
+</html>

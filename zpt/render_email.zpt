@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<div tal:content="structure options/conteudo"></div>
+	<div tal:condition="python: options['lista_pdfs']" style="height: 100vh; display: flex;">
+        <object style="margin-left: 1px;" tal:repeat="pdf options/lista_pdfs" width="50%" height="100%;" type="application/pdf" tal:attributes="data python: options['string_data'] + pdf">
+        </object>
+    </div>
+</body>
+</html>

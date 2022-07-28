@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<span tal:condition="python: not options['lista'] and not options['lista_imediatos']">Nenhum E-mail encontrado.</span>
+	<table border="1px solid black" tal:condition="options/lista" style="text-align: center;">
+		<thead>
+			<tr>
+				<td colspan="2">
+					Maildrop
+				</td>
+			</tr>
+			<tr>
+				<td>Arquivo</td>
+				<td>Horário</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr tal:repeat="item options/lista">
+				<td>
+					<a tal:attributes="href python: 'abrir_email?arquivo=' + item['arquivo']" tal:content="python: item['arquivo'].split('/')[-1]"></a>
+				</td>
+				<td tal:content="item/horario"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table border="1px solid black" tal:condition="options/lista_imediatos" style="text-align: center; margin-top: 20px;">
+		<thead>
+			<tr>
+				<td colspan="2">
+					Maildrop Imediato
+				</td>
+			</tr>
+			<tr>
+				<td>Arquivo</td>
+				<td>Horário</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr tal:repeat="item options/lista_imediatos">
+				<td>
+					<a tal:attributes="href python: 'abrir_email?arquivo=' + item['arquivo']" tal:content="python: item['arquivo'].split('/')[-1]"></a>
+				</td>
+				<td tal:content="item/horario"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
