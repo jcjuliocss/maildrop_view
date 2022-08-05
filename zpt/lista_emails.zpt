@@ -4,6 +4,7 @@
 </head>
 <body>
 	<span tal:condition="python: not options['lista'] and not options['lista_imediatos']">Nenhum E-mail encontrado.</span>
+	<a onclick="javascript:location.reload();" href="">Recarregar</a>
 	<table border="1px solid black" tal:condition="options/lista" style="text-align: center;">
 		<thead>
 			<tr>

@@ -35,11 +35,11 @@ class MaildropView(SimpleItem.SimpleItem):
         lista = glob.glob('/tmp/maildrop/spool/*')
         lista_imediatos = glob.glob('/tmp/maildrop_imediato/spool/*')
 
-        lista = sorted(lista,
-                       key=os.path.getmtime)
+        # lista = sorted(lista,
+        #                key=os.path.getmtime)
 
-        lista_imediatos = sorted(lista_imediatos,
-                                 key=os.path.getmtime)
+        # lista_imediatos = sorted(lista_imediatos,
+        #                          key=os.path.getmtime)
 
         nova_lista = []
         for file_path in lista:
@@ -83,6 +83,10 @@ class MaildropView(SimpleItem.SimpleItem):
 
         conteudo = arquivo.read()
         conteudo = conteudo.replace('https://www.nube.com.br',
+                                    'http://localhost')
+        conteudo = conteudo.replace('https://nube.com.br',
+                                    'http://localhost')
+        conteudo = conteudo.replace('https://nubenet.nube.com.br',
                                     'http://localhost')
 
         arquivo.close()
