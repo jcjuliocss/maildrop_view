@@ -10,7 +10,7 @@
 		<thead>
 			<tr>
 				<td colspan="2">
-					Maildrop
+					Maildrop - <span tal:content="python:len(options['lista'])"></span>
 				</td>
 			</tr>
 			<tr>
