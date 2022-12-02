@@ -73,11 +73,11 @@ class MaildropView(SimpleItem.SimpleItem):
         """."""
         from os import system
 
-        system('mhonarc ' + arquivo)
+        system('mhonarc {} -outdir /tmp'.format(arquivo))
 
-        caminho_pasta = '/'.join(product_path.split('/')[:-3])
+        # caminho_pasta = '/'.join(product_path.split('/')[:-3])
 
-        caminho_arquivo = caminho_pasta + '/msg00000.html'
+        caminho_arquivo = '/tmp/msg00000.html'
 
         arquivo = open(caminho_arquivo, 'r')
 
@@ -91,7 +91,7 @@ class MaildropView(SimpleItem.SimpleItem):
 
         arquivo.close()
 
-        lista_caminhos_pdfs = glob.glob(caminho_pasta + '/*.bin')
+        lista_caminhos_pdfs = glob.glob('/tmp/*.bin')
 
         corpo_pdf = None
         lista_pdfs = []
@@ -101,8 +101,8 @@ class MaildropView(SimpleItem.SimpleItem):
             arquivo_pdf.close()
             lista_pdfs.append(base64.encodestring(str(corpo_pdf)))
 
-        system('rm ' + caminho_pasta + '/*.bin')
-        system('rm ' + caminho_pasta + '/*.html')
+        system('rm /tmp/*.bin')
+        system('rm /tmp/*.html')
 
         string_data = 'data:application/pdf;base64,'
 
