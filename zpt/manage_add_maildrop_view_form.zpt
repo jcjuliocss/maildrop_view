@@ -6,8 +6,8 @@
 </head>
 <body>
     <form name="form" action="manage_add_maildrop_view"><br>
-	    <p>Nome da instancia:</p>
-	    <input type="text" name="id:string"><br>
+	    <p>Nome da instancia: <input type="text" name="id:string"></p>
+	    <p>Caminho repositório assinebem (github): <input type="text" name="caminho_repo:string"></p>
 	    <input type="submit" value="add">
 	</form>
 </body>
