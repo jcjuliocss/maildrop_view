@@ -34,19 +34,13 @@ class MaildropView(SimpleItem.SimpleItem):
 
     def lista_emails(self):
         """."""
-        system(self.caminho_repo + 'docker-dev/commands/spool copy')
         lista = list(
             filter(os.path.isfile, glob.glob("/tmp/maildrop/spool/*")))
         lista_imediatos = list(filter(
             os.path.isfile, glob.glob("/tmp/maildrop_imediato/spool/*")))
-        lista_assinebem = list(filter(
-            os.path.isfile, glob.glob("/tmp/maildrop/spool/assinebem-app/*")))
 
-        # lista = sorted(lista,
-        #                key=os.path.getmtime)
-
-        # lista_imediatos = sorted(lista_imediatos,
-        #                          key=os.path.getmtime)
+        lista.sort(key=lambda x: os.path.getmtime(x))
+        lista_imediatos.sort(key=lambda x: os.path.getmtime(x))
 
         nova_lista = []
         for file_path in lista:
@@ -68,31 +62,17 @@ class MaildropView(SimpleItem.SimpleItem):
                  'horario': timestamp_str}
             )
 
-        nova_lista_ass_bem = []
-        for file_path in lista_assinebem:
-            timestamp_str = time.strftime(
-                '%d/%m/%Y - %H:%M:%S',
-                time.gmtime(os.path.getmtime(file_path)))
-            nova_lista_ass_bem.append(
-                {'arquivo': file_path,
-                 'horario': timestamp_str}
-            )
-
         nova_lista.sort(reverse=True)
         nova_lista_imediatos.sort(reverse=True)
-        nova_lista_ass_bem.sort(reverse=True)
 
         return self.listagem_emails(
             lista=nova_lista,
-            lista_imediatos=nova_lista_imediatos,
-            lista_assinebem=nova_lista_ass_bem
+            lista_imediatos=nova_lista_imediatos
         )
 
     def abrir_email(self, arquivo):
         """."""
         system('mhonarc {} -outdir /tmp/maildrop'.format(arquivo))
-
-        # caminho_pasta = '/'.join(product_path.split('/')[:-3])
 
         caminho_arquivo = '/tmp/maildrop/msg00000.html'
 
@@ -136,11 +116,6 @@ class MaildropView(SimpleItem.SimpleItem):
 
         os.remove(arquivo)
 
-        if 'assinebem-app' in arquivo:
-            caminho_assinebem_docker = arquivo.replace('/assinebem-app', '')
-            system('docker exec assinebem-app rm -rf {}'.format(
-                caminho_assinebem_docker))
-
         return """
             <script>
                 alert('email excluido');
@@ -178,26 +153,7 @@ class MaildropView(SimpleItem.SimpleItem):
             </script>
         """
 
-    def limpa_assinebem(self):
-        """Limpa lista de emails assinebem."""
-        lista_assinebem = list(filter(
-            os.path.isfile, glob.glob("/tmp/maildrop/spool/assinebem-app/*")))
-
-        for email in lista_assinebem:
-            os.remove(email)
-
-            caminho_assinebem_docker = email.replace('/assinebem-app', '')
-            system('docker exec assinebem-app rm -rf {}'.format(
-                caminho_assinebem_docker))
-
-        return """
-            <script>
-                alert('emails excluidos');
-                window.location.assign('lista_emails');
-            </script>
-        """
-
-    listagem_emails = PageTemplateFile('zpt/lista_emails', globals())
+    listagem_emails = PageTemplateFile('zpt/listagem_emails', globals())
     render_email = PageTemplateFile('zpt/render_email', globals())
 
 
