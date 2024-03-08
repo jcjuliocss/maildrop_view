@@ -90,11 +90,11 @@ class MaildropView(SimpleItem.SimpleItem):
 
     def abrir_email(self, arquivo):
         """."""
-        system('mhonarc {} -outdir /tmp'.format(arquivo))
+        system('mhonarc {} -outdir /tmp/maildrop'.format(arquivo))
 
         # caminho_pasta = '/'.join(product_path.split('/')[:-3])
 
-        caminho_arquivo = '/tmp/msg00000.html'
+        caminho_arquivo = '/tmp/maildrop/msg00000.html'
 
         arquivo = open(caminho_arquivo, 'r')
 
@@ -108,7 +108,7 @@ class MaildropView(SimpleItem.SimpleItem):
 
         arquivo.close()
 
-        lista_caminhos_pdfs = glob.glob('/tmp/*.bin')
+        lista_caminhos_pdfs = glob.glob('/tmp/maildrop/*.bin')
 
         corpo_pdf = None
         lista_pdfs = []
@@ -118,8 +118,8 @@ class MaildropView(SimpleItem.SimpleItem):
             arquivo_pdf.close()
             lista_pdfs.append(base64.encodestring(str(corpo_pdf)))
 
-        system('rm /tmp/*.bin')
-        system('rm /tmp/*.html')
+        system('rm /tmp/maildrop/*.bin')
+        system('rm /tmp/maildrop/*.html')
 
         string_data = 'data:application/pdf;base64,'
 
