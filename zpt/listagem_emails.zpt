@@ -10,13 +10,14 @@
 	<table border="1px solid black" tal:condition="options/lista" style="text-align: center;">
 		<thead>
 			<tr>
-				<td colspan="2">
-					Maildrop - <span tal:content="python:len(options['lista'])"></span>
+				<td colspan="3">
+					Maildrop - <span tal:content="python:len(options['lista'])"></span> - <a href="limpa">Limpar</a>
 				</td>
 			</tr>
 			<tr>
 				<td>Arquivo</td>
 				<td>Horário</td>
+				<td>Excluir</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -25,6 +26,7 @@
 					<a tal:attributes="href python: 'abrir_email?arquivo=' + item['arquivo']" tal:content="python: item['arquivo'].split('/')[-1]"></a>
 				</td>
 				<td tal:content="item/horario"></td>
+				<td><a tal:attributes="href string:excluir_email?arquivo=${item/arquivo}" style="text-decoration: none; cursor: pointer;">X</a></td>
 			</tr>
 		</tbody>
 	</table>
@@ -32,13 +34,14 @@
 	<table border="1px solid black" tal:condition="options/lista_imediatos" style="text-align: center; margin-top: 20px;">
 		<thead>
 			<tr>
-				<td colspan="2">
-					Maildrop Imediato
+				<td colspan="3">
+					Maildrop Imediato - <span tal:content="python:len(options['lista_imediatos'])"></span> - <a href="limpa_imediatos">Limpar</a>
 				</td>
 			</tr>
 			<tr>
 				<td>Arquivo</td>
 				<td>Horário</td>
+				<td>Excluir</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -47,6 +50,7 @@
 					<a tal:attributes="href python: 'abrir_email?arquivo=' + item['arquivo']" tal:content="python: item['arquivo'].split('/')[-1]"></a>
 				</td>
 				<td tal:content="item/horario"></td>
+				<td><a tal:attributes="href string:excluir_email?arquivo=${item/arquivo}" style="text-decoration: none; cursor: pointer;">X</a></td>
 			</tr>
 		</tbody>
 	</table>
