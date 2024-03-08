@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>Maildrop Viewer</title>
-	<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1334/1334110.png">
 </head>
 <body>
 	<span tal:condition="python: not options['lista'] and not options['lista_imediatos']">Nenhum E-mail encontrado.</span>
