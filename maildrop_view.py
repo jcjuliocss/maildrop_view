@@ -146,6 +146,55 @@ class MaildropView(SimpleItem.SimpleItem):
             </script>
         """
 
+    def limpa(self):
+        """Limpa lista de emails."""
+        lista = list(
+            filter(os.path.isfile, glob.glob("/tmp/maildrop/spool/*")))
+
+        for email in lista:
+            os.remove(email)
+
+        return """
+            <script>
+                alert('emails excluidos');
+                window.location.assign('lista_emails');
+            </script>
+        """
+
+    def limpa_imediatos(self):
+        """Limpa lista de emails imediatos."""
+        lista_imediatos = list(filter(
+            os.path.isfile, glob.glob("/tmp/maildrop_imediato/spool/*")))
+
+        for email in lista_imediatos:
+            os.remove(email)
+
+        return """
+            <script>
+                alert('emails excluidos');
+                window.location.assign('lista_emails');
+            </script>
+        """
+
+    def limpa_assinebem(self):
+        """Limpa lista de emails assinebem."""
+        lista_assinebem = list(filter(
+            os.path.isfile, glob.glob("/tmp/maildrop/spool/assinebem-app/*")))
+
+        for email in lista_assinebem:
+            os.remove(email)
+
+            caminho_assinebem_docker = email.replace('/assinebem-app', '')
+            system('docker exec assinebem-app rm -rf {}'.format(
+                caminho_assinebem_docker))
+
+        return """
+            <script>
+                alert('emails excluidos');
+                window.location.assign('lista_emails');
+            </script>
+        """
+
     listagem_emails = PageTemplateFile('zpt/lista_emails', globals())
     render_email = PageTemplateFile('zpt/render_email', globals())
 

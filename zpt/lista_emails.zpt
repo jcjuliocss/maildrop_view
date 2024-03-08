@@ -11,7 +11,7 @@
 		<thead>
 			<tr>
 				<td colspan="3">
-					Maildrop - <span tal:content="python:len(options['lista'])"></span>
+					Maildrop - <span tal:content="python:len(options['lista'])"></span> - <a href="limpa">Limpar</a>
 				</td>
 			</tr>
 			<tr>
@@ -35,7 +35,7 @@
 		<thead>
 			<tr>
 				<td colspan="3">
-					Maildrop Imediato - <span tal:content="python:len(options['lista_imediatos'])"></span>
+					Maildrop Imediato - <span tal:content="python:len(options['lista_imediatos'])"></span> - <a href="limpa_imediatos">Limpar</a>
 				</td>
 			</tr>
 			<tr>
@@ -59,7 +59,7 @@
 		<thead>
 			<tr>
 				<td colspan="3">
-					Maildrop Assinebem - <span tal:content="python:len(options['lista_assinebem'])"></span>
+					Maildrop Assinebem - <span tal:content="python:len(options['lista_assinebem'])"></span> - <a href="limpa_assinebem">Limpar</a>
 				</td>
 			</tr>
 			<tr>
