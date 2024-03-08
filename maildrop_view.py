@@ -35,10 +35,12 @@ class MaildropView(SimpleItem.SimpleItem):
     def lista_emails(self):
         """."""
         system(self.caminho_repo + 'docker-dev/commands/spool copy')
-        lista = glob.glob('/tmp/maildrop/spool/*')
-        lista_imediatos = glob.glob('/tmp/maildrop_imediato/spool/*')
-        lista_assinebem = glob.glob(
-            '/tmp/maildrop/spool/assinebem-app/*')
+        lista = list(
+            filter(os.path.isfile, glob.glob("/tmp/maildrop/spool/*")))
+        lista_imediatos = list(filter(
+            os.path.isfile, glob.glob("/tmp/maildrop_imediato/spool/*")))
+        lista_assinebem = list(filter(
+            os.path.isfile, glob.glob("/tmp/maildrop/spool/assinebem-app/*")))
 
         # lista = sorted(lista,
         #                key=os.path.getmtime)
