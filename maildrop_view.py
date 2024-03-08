@@ -62,12 +62,24 @@ class MaildropView(SimpleItem.SimpleItem):
                  'horario': timestamp_str}
             )
 
+        nova_lista_ass_bem = []
+        for file_path in lista_assinebem:
+            timestamp_str = time.strftime(
+                '%d/%m/%Y - %H:%M:%S',
+                time.gmtime(os.path.getmtime(file_path)))
+            nova_lista_ass_bem.append(
+                {'arquivo': file_path,
+                 'horario': timestamp_str}
+            )
+
         nova_lista.sort(reverse=True)
         nova_lista_imediatos.sort(reverse=True)
+        nova_lista_ass_bem.sort(reverse=True)
 
         return self.listagem_emails(
             lista=nova_lista,
-            lista_imediatos=nova_lista_imediatos
+            lista_imediatos=nova_lista_imediatos,
+            lista_assinebem=nova_lista_ass_bem
         )
 
     def abrir_email(self, arquivo):
