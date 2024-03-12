@@ -1,6 +1,4 @@
 """."""
-from Globals import package_home
-
 from OFS import SimpleItem
 
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
@@ -10,9 +8,6 @@ import os
 import time
 import glob
 import base64
-
-global product_path
-product_path = os.path.join(package_home(globals())) + '/'
 
 
 class MaildropView(SimpleItem.SimpleItem):
