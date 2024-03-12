@@ -10,7 +10,6 @@ import os
 import time
 import glob
 import base64
-from os import system
 
 global product_path
 product_path = os.path.join(package_home(globals())) + '/'
@@ -19,7 +18,7 @@ product_path = os.path.join(package_home(globals())) + '/'
 class MaildropView(SimpleItem.SimpleItem):
     """."""
 
-    meta_type = 'maildrop_view'
+    meta_type = 'MaildropView'
 
     manage_options = (
         (
@@ -27,10 +26,9 @@ class MaildropView(SimpleItem.SimpleItem):
         )
     )
 
-    def __init__(self, id, caminho_repo):
+    def __init__(self, id):
         """."""
         self.id = id
-        self.caminho_repo = caminho_repo
 
     def lista_emails(self):
         """."""
@@ -72,7 +70,7 @@ class MaildropView(SimpleItem.SimpleItem):
 
     def abrir_email(self, arquivo):
         """."""
-        system('mhonarc {} -outdir /tmp/maildrop'.format(arquivo))
+        os.system('mhonarc {} -outdir /tmp/maildrop'.format(arquivo))
 
         caminho_arquivo = '/tmp/maildrop/msg00000.html'
 
@@ -80,11 +78,11 @@ class MaildropView(SimpleItem.SimpleItem):
 
         conteudo = arquivo.read()
         conteudo = conteudo.replace('https://www.nube.com.br',
-                                    'http://localhost')
+                                    'http://localhost:8082')
         conteudo = conteudo.replace('https://nube.com.br',
-                                    'http://localhost')
+                                    'http://localhost:8082')
         conteudo = conteudo.replace('https://nubenet.nube.com.br',
-                                    'http://localhost')
+                                    'http://localhost:8082')
 
         arquivo.close()
 
@@ -98,8 +96,8 @@ class MaildropView(SimpleItem.SimpleItem):
             arquivo_pdf.close()
             lista_pdfs.append(base64.encodestring(str(corpo_pdf)))
 
-        system('rm /tmp/maildrop/*.bin')
-        system('rm /tmp/maildrop/*.html')
+        os.system('rm /tmp/maildrop/*.bin')
+        os.system('rm /tmp/maildrop/*.html')
 
         string_data = 'data:application/pdf;base64,'
 
@@ -157,11 +155,11 @@ class MaildropView(SimpleItem.SimpleItem):
     render_email = PageTemplateFile('zpt/render_email', globals())
 
 
-def manage_add_maildrop_view(self, id, caminho_repo):
+def manage_add_maildrop_view(self, id):
     """."""
-    mdv = MaildropView(id, caminho_repo)
+    mdv = MaildropView(id)
     self._setObject(id, mdv)
-    self.REQUEST.RESPONSE.redirect(id + '/lista_emails')
+    self.REQUEST.RESPONSE.redirect(id + '/listagem_emails')
 
 manage_add_maildrop_view_form = PageTemplateFile(
     'zpt/manage_add_maildrop_view_form',
