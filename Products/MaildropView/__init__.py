@@ -10,5 +10,5 @@ def initialize(context):
             maildropview.manage_add_maildrop_view_form,
             maildropview.manage_add_maildrop_view,
         ),
-        icon='img/icon.png'
+        icon='/img/icon.png'
     )

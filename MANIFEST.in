@@ -1,1 +1,1 @@
-recursive-include Products/MaildropView/
+recursive-include Products/MaildropView/ zpt/*.zpt img/*.png

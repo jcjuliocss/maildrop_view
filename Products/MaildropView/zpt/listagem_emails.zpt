@@ -6,7 +6,7 @@
 <body>
 	<span tal:condition="python: not options.get('lista') and not options.get('lista_imediatos')">Nenhum E-mail encontrado.</span>
 	<a onclick="javascript:location.reload();" href="">Recarregar</a>
-	<table border="1px solid black" tal:condition="options/lista" style="text-align: center;">
+	<table border="1px solid black" tal:condition="options.get('lista')" style="text-align: center;">
 		<thead>
 			<tr>
 				<td colspan="3">
@@ -30,7 +30,7 @@
 		</tbody>
 	</table>
 
-	<table border="1px solid black" tal:condition="options/lista_imediatos" style="text-align: center; margin-top: 20px;">
+	<table border="1px solid black" tal:condition="options.get('lista_imediatos')" style="text-align: center; margin-top: 20px;">
 		<thead>
 			<tr>
 				<td colspan="3">
