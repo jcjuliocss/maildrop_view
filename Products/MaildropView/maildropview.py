@@ -78,6 +78,8 @@ class MaildropView(SimpleItem.SimpleItem):
                                     'http://localhost:8082')
         conteudo = conteudo.replace('https://nubenet.nube.com.br',
                                     'http://localhost:8082')
+        conteudo = conteudo.replace('https://www.assinebem.com.br',
+                                    'http://localhost:8101')
 
         arquivo.close()
 
