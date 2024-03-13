@@ -156,7 +156,7 @@ def manage_add_maildrop_view(self, id):
     """."""
     mdv = MaildropView(id)
     self._setObject(id, mdv)
-    self.REQUEST.RESPONSE.redirect(id + '/listagem_emails')
+    self.REQUEST.RESPONSE.redirect(id + '/lista_emails')
 
 manage_add_maildrop_view_form = PageTemplateFile(
     'zpt/manage_add_maildrop_view_form',

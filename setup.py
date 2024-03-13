@@ -7,7 +7,7 @@ long_description += "\n------\n"
 
 setuptools.setup(
     name="maildropview",
-    version='1.0.5',
+    version='1.0.6',
     description="Produto para visualizar emails do maildrop",
     long_description=long_description,
     long_description_content_type="text/markdown",
